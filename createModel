@@ -1,0 +1,21 @@
+#! /bin/bash
+#create by beshoy semsem
+
+function createModel {
+model=$1
+model="$(tr '[:upper:]' '[:lower:]' <<< ${model:0:1})${model:1}"
+Model="$(tr '[:lower:]' '[:upper:]' <<< ${model:0:1})${model:1}"
+if test -d components/{model}
+then
+echo "you have model as same name. please choose onther name"
+sleep 3
+else
+touch actions/${Model}Action.js
+mkdir components/$model
+touch components/$model/${Model}.js
+touch containers/${Model}.js
+touch reducers/${model}.js
+echo "$Model model has created successfully"
+sleep 2
+fi
+}

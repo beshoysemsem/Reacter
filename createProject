@@ -1,0 +1,20 @@
+#! /bin/bash
+#create by beshoy semsem
+
+function createProject {
+if test -d projects/$1
+then
+echo "you have project as same name. please choose onther name"
+sleep 3
+else
+mkdir -p projects/$1
+mkdir projects/$1/actions
+mkdir projects/$1/components
+mkdir projects/$1/containers
+mkdir projects/$1/reducers
+touch projects/$1/routes.js
+cd projects/$1
+echo "$1 project has created successfully"
+sleep 2
+fi
+}
