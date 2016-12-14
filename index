@@ -11,65 +11,72 @@ source listModels
 projectName="" 
 clear
 while true
-do
-    echo "-Please, Choose one from the below options:"
-    echo ""
-    echo "1) Press 1 for creating new project "
-    echo "2) Press 2 for listing your projects "
-    echo "3) Press 3 for using project "
-    echo ""  
-    read -p "-Your choise is: " choice 
-    clear   
-    case $choice in
-	1) #create
-        echo -n "Please enter Project name  : "
-        read projectName 
-        createProject  $projectName
-        break    
-	;;
-    2) #list
-        listProjects 
-	;;
-	3) #use old project 
-        echo -n "Please enter Project name  : "
-        read projectName 
-        # check if project exist
-        if test -d projects/${projectName}
-        then
-        cd projects/${projectName}
+do 
+    while true
+    do
+        echo "-Please, Choose one from the below options:"
+        echo ""
+        echo "1) Press 1 for creating new project "
+        echo "2) Press 2 for listing your projects "
+        echo "3) Press 3 for using project "
+        echo ""  
+        read -p "-Your choise is: " choice 
+        clear   
+        case $choice in
+        1) #create
+            echo -n "Please enter Project name  : "
+            read projectName 
+            createProject  $projectName
+            break    
+        ;;
+        2) #list
+            listProjects 
+        ;;
+        3) #use old project 
+            echo -n "Please enter Project name  : "
+            read projectName 
+            # check if project exist
+            if test -d projects/${projectName}
+            then
+            cd projects/${projectName}
+            break
+            else
+            echo "Error 404 :Project Not Found"
+                sleep 2
+                clear
+            fi
+        ;;    
+        esac
+    done      
+    clear
+    # Now we have project 
+    while true
+    do
+        echo  "Now you used ${projectName} Project....."
+        echo  ""
+        echo  "-Please, Choose one from the below options:"
+        echo  "1) Press 1 for creating new model "
+        echo  "2) Press 2 for listing your models "
+        echo  "3) Press 3 for change project "
+        read -p "-Your choise is: " choice 
+        clear   
+        case $choice in
+        1) #create model
+        clear
+        echo -n "Please enter model name  : "
+        read modelName 
+        createModel  $modelName
+        ;;
+        2) #list model
+        clear
+        listModels
+        ;;
+        3) #change project
+        clear
         break
-        else
-        echo "Error 404 :Project Not Found"
-            sleep 2
-            clear
-        fi
-	;;    
-    esac
-done      
-clear
-# Now we have project 
-while true
-do
-    echo  "Now you used ${projectName} Project....."
-    echo  ""
-    echo  "-Please, Choose one from the below options:"
-    echo  "1) Press 1 for creating new model "
-    echo  "2) Press 2 for listing your models "
-    read -p "-Your choise is: " choice 
-    clear   
-    case $choice in
-	1) #create model
-	clear
-	echo -n "Please enter model name  : "
-	read modelName 
-	createModel  $modelName
-	;;
-    2) #list model
-	clear
-	listModels
-	;;
-    esac  
-    
+        ;;
+        esac  
+    done
 
 done
 
