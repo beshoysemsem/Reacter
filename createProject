@@ -7,13 +7,98 @@ then
 echo "you have project as same name. please choose onther name"
 sleep 3
 else
-mkdir -p projects/$1
-mkdir projects/$1/actions
-mkdir projects/$1/components
-mkdir projects/$1/containers
-mkdir projects/$1/reducers
-touch projects/$1/routes.js
-cd projects/$1
+mkdir -p projects/$1/src
+mkdir projects/$1/src/actions
+mkdir projects/$1/src/components
+mkdir projects/$1/src/containers
+mkdir projects/$1/src/reducers
+touch projects/$1/src/store.js
+touch projects/$1/src/Main.js
+mkdir -p projects/$1/dist/js
+touch projects/$1/dist/index.html
+
+# add store.js body#
+cat <<EOT >> projects/$1/src/store.js
+import {createStore,applyMiddleware} from "redux"
+import logger from 'redux-logger';
+import thunk from 'redux-thunk';
+import promise from 'redux-promise-middleware';
+import reducers from './reducers';
+
+const middleware=applyMiddleware(promise(),thunk,logger());
+
+export default createStore(reducers,middleware);
+EOT
+# ================ #
+
+# add reducers body#
+cat <<EOT >> projects/$1/src/reducers/index.js
+import {
+    combineReducers
+} from 'redux';
+export default combineReducers({
+    
+})EOT
+# ================ #
+
+
+# add Main.js body#
+cat <<EOT >> projects/$1/src/Main.js
+import React from "react";
+import ReactDOM from "react-dom";
+import Main from "./components/Main";
+import {Provider} from 'react-redux';
+import store from './store';
+ReactDOM.render(
+    <Provider store={store}>
+        <Main/>
+    </Provider>
+,document.getElementById("app"));
+EOT
+# ================ #
+
+# add index.js body#
+cat <<EOT >> projects/$1/dist/index.html
+<html>
+ <head>
+     <title>$1 | Reacter </title>
+ </head>
+
+ <body>
+     <div id="app">My APP</div>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+     <script src="./js/app.js"></script>
+ </body>
+
+</html>
+
+EOT
+# ================ #
+
+# add main component body#
+cat <<EOT >> projects/$1/src/components/Main.js
+import React from "react";
+import {connect} from 'react-redux';
+
+@connect((store)=>{
+    return{
+        // each key in this object will pass to component as props
+    };
+})
+class Main extends React.Component{
+    render (){        
+        return (
+            <div> $1 | Reacter Application </div>
+        )
+    }
+}
+
+module.exports=Main;
+
+EOT
+# ================ #
+
+cd projects/$1/src
 echo "$1 project has created successfully"
 sleep 2
 fi

@@ -10,9 +10,9 @@ source listModels
 #used project
 projectName="" 
 clear
-while true
+while true #main loop 
 do 
-    while true
+    while true # projects menu loop
     do
         echo "-Please, Choose one from the below options:"
         echo ""
@@ -50,7 +50,7 @@ do
     done      
     clear
     # Now we have project 
-    while true
+    while true #models menu loop
     do
         echo  "Now you used ${projectName} Project....."
         echo  ""
@@ -73,12 +73,12 @@ do
         ;;
         3) #change project
         clear
-        cd ./../../ #back to root directory
-        break
+        cd ./../../../ #back to root directory
+        break # back to main menu loop
         ;;
         esac  
     done
 
-done
+done #end loop
 
 
