@@ -4,6 +4,8 @@
 #source FILENAME
 source createProject
 source createModel
+source listProjects
+source listModels
 #================= MAIN FUNCTION =======================#
 #used project
 projectName="" 
@@ -13,7 +15,8 @@ do
     echo "-Please, Choose one from the below options:"
     echo ""
     echo "1) Press 1 for creating new project "
-    echo "2) Press 2 for use old project "
+    echo "2) Press 2 for listing your projects "
+    echo "3) Press 3 for using project "
     echo ""  
     read -p "-Your choise is: " choice 
     clear   
@@ -24,7 +27,10 @@ do
         createProject  $projectName
         break    
 	;;
-	2) #use old project 
+    2) #list
+        listProjects 
+	;;
+	3) #use old project 
         echo -n "Please enter Project name  : "
         read projectName 
         # check if project exist
@@ -44,10 +50,11 @@ clear
 # Now we have project 
 while true
 do
-    echo "-Please, Choose one from the below options:"
-    echo ""
-    echo "1) Press 1 for creating new model "
-    echo ""  
+    echo  "Now you used ${projectName} Project....."
+    echo  ""
+    echo  "-Please, Choose one from the below options:"
+    echo  "1) Press 1 for creating new model "
+    echo  "2) Press 2 for listing your models "
     read -p "-Your choise is: " choice 
     clear   
     case $choice in
@@ -56,6 +63,10 @@ do
 	echo -n "Please enter model name  : "
 	read modelName 
 	createModel  $modelName
+	;;
+    2) #list model
+	clear
+	listModels
 	;;
     esac  
     

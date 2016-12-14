@@ -1,0 +1,14 @@
+#! /bin/bash
+#create by beshoy semsem
+
+function listProjects {
+		clear
+		echo   "=========Projects=========="
+			ls projects/ | cat			
+		echo  "=========================="
+        echo ""
+		echo  "Press Enter key to return back to menu ............."
+        read key
+        clear
+
+}
