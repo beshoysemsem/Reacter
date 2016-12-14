@@ -73,6 +73,7 @@ do
         ;;
         3) #change project
         clear
+        cd ./../../ #back to root directory
         break
         ;;
         esac  
