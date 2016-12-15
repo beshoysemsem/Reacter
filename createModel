@@ -15,6 +15,8 @@ mkdir components/$model
 touch components/$model/${Model}.js
 touch containers/${Model}.js
 touch reducers/${model}.js
+#add reducer to index of reducers
+#sed "/// end imports / {N; s/import $model from './$model'\n/// end imports \n&/}" reducers/index.js 
 echo "$Model model has created successfully"
 sleep 2
 fi

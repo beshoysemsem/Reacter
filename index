@@ -38,7 +38,7 @@ do
             # check if project exist
             if test -d projects/${projectName}
             then
-            cd projects/${projectName}
+            cd projects/${projectName}/src
             break
             else
             echo "Error 404 :Project Not Found"
