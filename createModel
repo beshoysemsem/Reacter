@@ -1,8 +1,9 @@
 #! /bin/bash
 #create by beshoy semsem
-
+source insertBefore
 function createModel {
 model=$1
+model=${model// /_}
 model="$(tr '[:upper:]' '[:lower:]' <<< ${model:0:1})${model:1}"
 Model="$(tr '[:lower:]' '[:upper:]' <<< ${model:0:1})${model:1}"
 if test -d components/{model}
@@ -16,8 +17,10 @@ touch components/$model/${Model}.js
 touch containers/${Model}.js
 touch reducers/${model}.js
 #add reducer to index of reducers
-#sed "/// end imports / {N; s/import $model from './$model'\n/// end imports \n&/}" reducers/index.js 
+insertBefore reducers/index.js "\/\/ end imports" "import $model from './$model';" 
+insertBefore reducers/index.js "\/\/ end reducers object" "$model," 
 echo "$Model model has created successfully"
 sleep 2
+clear
 fi
 }

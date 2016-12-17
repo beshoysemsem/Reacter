@@ -110,8 +110,9 @@ import {
 // reducers files
 // end imports 
 export default combineReducers({
-    // reducers
-})EOT
+    // end reducers object
+})
+EOT
 # ================ #
 
 

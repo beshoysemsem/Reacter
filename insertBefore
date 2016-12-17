@@ -3,5 +3,5 @@
 
 function insertBefore {
 file="$1" line="$2" newText="$3"
-sed -i -e "/^$line$/c"$'\\\n'"$newText\n"$line""$'\n' "$file"
+sed -i -e "/${line}/c ${newText}\n${line}" $file
 }

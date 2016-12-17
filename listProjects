@@ -4,7 +4,9 @@
 function listProjects {
 		clear
 		echo   "=========Projects=========="
-			ls projects/ | cat			
+			cd projects/
+			for i in $(ls -d */); do echo ${i%%/}; done
+			cd ../			
 		echo  "=========================="
         echo ""
 		echo  "Press Enter key to return back to menu ............."

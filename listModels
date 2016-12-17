@@ -4,7 +4,9 @@
 function listModels {
 		clear
 		echo   "=========Models=========="
-			ls components/ | cat			
+			cd components
+			for i in $(ls -d */); do echo ${i%%/}; done
+			cd ../			
 		echo  "=========================="
         echo ""
 		echo  "Press Enter key to return back to menu ............."
