@@ -16,8 +16,51 @@ mkdir components/$model
 touch components/$model/${Model}.js
 touch containers/${Model}.js
 touch reducers/${model}.js
+
+# add reducers body#
+cat <<EOT >> reducers/${model}.js
+const indexInitialState = {}
+export const $model = (state = indexInitialState, action) => {
+    switch (action.type) {
+        case "ACTION_TYPE_1":
+            return state
+        default:
+            return state
+    }
+}
+EOT
+
+# add Action body#
+cat <<EOT >> actions/${Model}Action.js
+export function function${Model}() {
+  return {
+    type: "ACTION_TYPE_1",
+    payload: {
+    }
+  }
+}
+EOT
+
+# add component body#
+cat <<EOT >> components/$model/${Model}.js
+var React = require("react");
+var $model = React.createClass({
+	render:function() {
+		return (
+			 <div>
+	        </div>
+			);
+	}
+});
+module.exports = $model;
+
+EOT
+
+
 #add reducer to index of reducers
 insertBefore reducers/index.js "\/\/ end imports" "import $model from './$model';" 
+insertBefore components/Main.js "\/\/ end imports" "import $model from '../components/$model/${Model}.js';" 
+insertBefore components/Main.js "\/\/ end imports" "import $model from '../actions/${Model}Action';" 
 insertBefore reducers/index.js "\/\/ end reducers object" "$model," 
 echo "$Model model has created successfully"
 sleep 2

@@ -153,6 +153,7 @@ EOT
 cat <<EOT >> projects/$1/src/components/Main.js
 import React from "react";
 import {connect} from 'react-redux';
+// end imports
 
 @connect((store)=>{
     return{
