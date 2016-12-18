@@ -4,8 +4,7 @@
 function createProject {
 if test -d projects/$1
 then
-echo "you have project as same name. please choose onther name"
-sleep 3
+$(zenity --error  --title="Reacter | Error" --text="you have project as same name. please choose onther name")
 else
 mkdir -p projects/$1/src
 touch projects/$1/package.json
@@ -174,7 +173,6 @@ EOT
 # ================ #
 
 cd projects/$1/src
-echo "$1 project has created successfully"
-sleep 2
+$(zenity --info  --title="Reacter | Info" --text="$1 project has created successfully")
 fi
 }

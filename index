@@ -14,65 +14,45 @@ while true #main loop
 do 
     while true # projects menu loop
     do
-        echo "-Please, Choose one from the below options:"
-        echo ""
-        echo "1) Press 1 for creating new project "
-        echo "2) Press 2 for listing your projects "
-        echo "3) Press 3 for using project "
-        echo ""  
-        read -p "-Your choise is: " choice 
-        clear   
+        choice=$(zenity --title "Reacter | Project" --height "300" --text "Please Choose one from the below options" --list --radiolist --column "" --column "Options" True Create\ new\ project False List\ Projects False Use\ old\ project False Exit)
         case $choice in
-        1) #create
-            echo -n "Please enter Project name  : "
-            read projectName 
+        Create\ new\ project) #create
+            projectName=$(zenity --entry --title="Reacter | Select Project" --text="Please enter Project name :")
             createProject  $projectName
             break    
         ;;
-        2) #list
-            listProjects 
+        List\ Projects) #list
+            listProjects            
         ;;
-        3) #use old project 
-            echo -n "Please enter Project name  : "
-            read projectName 
+        Use\ old\ project) #use old project 
+            projectName=$(zenity --entry --title="Reacter | Select Project" --text="Please enter Project name :")
             # check if project exist
             if test -d projects/${projectName}
             then
             cd projects/${projectName}/src
             break
             else
-            echo "Error 404 :Project Not Found"
-                sleep 2
-                clear
+            $(zenity --error --width="150" --title="404" --text="Project Not Found")
             fi
-        ;;    
+        ;; 
+        Exit)
+        exit 1
+        ;;   
         esac
     done      
-    clear
     # Now we have project 
     while true #models menu loop
     do
-        echo  "Now you used ${projectName} Project....."
-        echo  ""
-        echo  "-Please, Choose one from the below options:"
-        echo  "1) Press 1 for creating new model "
-        echo  "2) Press 2 for listing your models "
-        echo  "3) Press 3 for change project "
-        read -p "-Your choise is: " choice 
-        clear   
+        choice=$(zenity --title "Reacter | Model" --text "Please Choose one from the below options" --list --radiolist --column "" --column "Options" False Create\ new\ model False List\ models True Change\ project)
         case $choice in
-        1) #create model
-        clear
-        echo -n "Please enter model name  : "
-        read modelName 
+        Create\ new\ model) #create model
+        modelName=$(zenity --entry --title="Reacter | Select Project" --text="Please enter model name :") 
         createModel  $modelName
         ;;
-        2) #list model
-        clear
+        List\ models) #list model
         listModels
         ;;
-        3) #change project
-        clear
+        Change\ project) #change project
         cd ./../../../ #back to root directory
         break # back to main menu loop
         ;;
@@ -80,5 +60,3 @@ do
     done
 
 done #end loop
-
-

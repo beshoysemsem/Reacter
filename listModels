@@ -2,15 +2,9 @@
 #create by beshoy semsem
 
 function listModels {
-		clear
-		echo   "=========Models=========="
 			cd components
-			for i in $(ls -d */); do echo ${i%%/}; done
+			modelList=""
+			for i in $(ls -d */); do echo modelList=$modelList${i%%/}"\n"; done
 			cd ../			
-		echo  "=========================="
-        echo ""
-		echo  "Press Enter key to return back to menu ............."
-        read key
-        clear
-
+			$(zenity --info --width="150" --title="Reacter | Models List" --text="$modelList")
 }

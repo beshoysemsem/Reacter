@@ -2,15 +2,9 @@
 #create by beshoy semsem
 
 function listProjects {
-		clear
-		echo   "=========Projects=========="
+			projectList=""
 			cd projects/
-			for i in $(ls -d */); do echo ${i%%/}; done
+			for i in $(ls -d */); do projectList=$projectList${i%%/}"\n"; done
 			cd ../			
-		echo  "=========================="
-        echo ""
-		echo  "Press Enter key to return back to menu ............."
-        read key
-        clear
-
+			$(zenity --info --width="150" --title="Reacter | Projects List" --text="$projectList")
 }
