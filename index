@@ -3,6 +3,7 @@
 #================= INCLUDE FILES =======================#
 #source FILENAME
 source createProject
+source createProjectExpress
 source createModel
 source listProjects
 source listModels
@@ -14,11 +15,16 @@ while true #main loop
 do 
     while true # projects menu loop
     do
-        choice=$(zenity --title "Reacter | Project" --height "300" --text "Please Choose one from the below options" --list --radiolist --column "" --column "Options" True Create\ new\ project False List\ Projects False Use\ old\ project False Exit)
+        choice=$(zenity --title "Reacter | Project" --height "300" --text "Please Choose one from the below options" --list --radiolist --column "" --column "Options" True Create\ new\ project False Create\ new\ project\ with\ Express\ Server False List\ Projects False Use\ old\ project False Exit)
         case $choice in
         Create\ new\ project) #create
             projectName=$(zenity --entry --title="Reacter | Select Project" --text="Please enter Project name :")
             createProject  $projectName
+            break    
+        ;;
+        Create\ new\ project\ with\ Express\ Server) #create
+            projectName=$(zenity --entry --title="Reacter | Select Project" --text="Please enter Project name :")
+            createProjectExpress  $projectName
             break    
         ;;
         List\ Projects) #list
