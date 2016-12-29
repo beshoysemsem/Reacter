@@ -20,12 +20,20 @@ do
         Create\ new\ project) #create
             projectName=$(zenity --entry --title="Reacter | Select Project" --text="Please enter Project name :")
             createProject  $projectName
-            break    
+            result=$?
+            if [[ $result == 1 ]];
+                then
+                    break    
+                fi
         ;;
         Create\ new\ project\ with\ Express\ Server) #create
             projectName=$(zenity --entry --title="Reacter | Select Project" --text="Please enter Project name :")
-            createProjectExpress  $projectName
-            break    
+            createProjectExpress  $projectName 
+            result=$?
+            if [[ $result == 1 ]];                
+                then
+                     break   
+                fi 
         ;;
         List\ Projects) #list
             listProjects            

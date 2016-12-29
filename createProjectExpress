@@ -5,6 +5,7 @@ function createProjectExpress {
 if test -d projects/$1
 then
 $(zenity --error  --title="Reacter | Error" --text="you have project as same name. please choose onther name")
+return 0
 else
 mkdir -p projects/$1
 cd projects/$1 
@@ -204,5 +205,6 @@ EOT
 
 cd src
 $(zenity --info  --title="Reacter | Info" --text="$1 project has created successfully")
+return 1
 fi
 }
