@@ -6,9 +6,8 @@ if test -d projects/$1
 then
 $(zenity --error  --title="Reacter | Error" --text="you have project as same name. please choose onther name")
 else
-mkdir -p projects/$1
+mkdir -p projects/$1/src
 cd projects/$1
-mkdir /src
 touch package.json
 touch webpack.config.js
 mkdir src/actions
@@ -61,10 +60,10 @@ EOT
 cat <<EOT >> bower.json
 {
   "name": "$packageName",
-  "homepage": "",
-  "description": "Control Panel",
+  "description": "",
+  "main": "index.js",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "jquery": "^2.2.3",
     "bootstrap": "^3.3.7",
     "font-awesome": "fontawesome#^4.6.1"

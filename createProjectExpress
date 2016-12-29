@@ -16,7 +16,7 @@ rm package.json
 clear
 mkdir src
 touch webpack.config.js
-touch bower.js
+touch bower.json
 touch .bowerrc
 mkdir src/actions
 mkdir src/components
@@ -74,12 +74,13 @@ EOT
 cat <<EOT >> bower.json
 {
   "name": "$packageName",
-  "homepage": "",
+  "description": "",
+  "main": "index.js",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "jquery": "^2.2.3",
     "bootstrap": "^3.3.7",
-    "font-awesome": "fontawesome#^4.6.1",
+    "font-awesome": "fontawesome#^4.6.1"
   }
 }
 EOT
