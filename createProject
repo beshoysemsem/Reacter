@@ -6,23 +6,25 @@ if test -d projects/$1
 then
 $(zenity --error  --title="Reacter | Error" --text="you have project as same name. please choose onther name")
 else
-mkdir -p projects/$1/src
-touch projects/$1/package.json
-touch projects/$1/webpack.config.js
-mkdir projects/$1/src/actions
-mkdir projects/$1/src/components
-mkdir projects/$1/src/containers
-mkdir projects/$1/src/reducers
-touch projects/$1/src/reducers/index.js
-touch projects/$1/src/store.js
-touch projects/$1/src/Main.js
-mkdir -p projects/$1/dist/js
-touch projects/$1/dist/index.html
+mkdir -p projects/$1
+cd projects/$1
+mkdir /src
+touch package.json
+touch webpack.config.js
+mkdir src/actions
+mkdir src/components
+mkdir src/containers
+mkdir src/reducers
+touch src/reducers/index.js
+touch src/store.js
+touch src/Main.js
+mkdir -p dist/js
+touch dist/index.html
 packageName=$1
 packageName=${packageName// /_}
 packageName=`echo "${packageName}" | tr '[A-Z]' '[a-z]'`
 # add package.json body#
-cat <<EOT >> projects/$1/package.json
+cat <<EOT >> package.json
 {
   "name": "$packageName",
   "version": "1.0.0",
@@ -55,8 +57,30 @@ cat <<EOT >> projects/$1/package.json
 }
 EOT
 
+# add bower.json body#
+cat <<EOT >> bower.json
+{
+  "name": "$packageName",
+  "homepage": "",
+  "description": "Control Panel",
+  "license": "MIT",
+  "devDependencies": {
+    "jquery": "^2.2.3",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "fontawesome#^4.6.1"
+  }
+}
+EOT
+
+# add bowerrc body#
+cat <<EOT >> .bowerrc
+{
+  "directory" : "dist/vendors"
+}
+EOT
+
 # add store.js body#
-cat <<EOT >> projects/$1/webpack.config.js
+cat <<EOT >> webpack.config.js
 var config = {
     entry: "./src/Main.js",
 
@@ -88,7 +112,7 @@ EOT
 
 
 # add store.js body#
-cat <<EOT >> projects/$1/src/store.js
+cat <<EOT >> src/store.js
 import {createStore,applyMiddleware} from "redux"
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
@@ -102,7 +126,7 @@ EOT
 # ================ #
 
 # add reducers body#
-cat <<EOT >> projects/$1/src/reducers/index.js
+cat <<EOT >> src/reducers/index.js
 import {
     combineReducers
 } from 'redux';
@@ -116,7 +140,7 @@ EOT
 
 
 # add Main.js body#
-cat <<EOT >> projects/$1/src/Main.js
+cat <<EOT >> src/Main.js
 import React from "react";
 import ReactDOM from "react-dom";
 import Main from "./components/Main";
@@ -131,7 +155,7 @@ EOT
 # ================ #
 
 # add index.js body#
-cat <<EOT >> projects/$1/dist/index.html
+cat <<EOT >> dist/index.html
 <html>
  <head>
      <title>$1 | Reacter </title>
@@ -149,7 +173,7 @@ EOT
 # ================ #
 
 # add main component body#
-cat <<EOT >> projects/$1/src/components/Main.js
+cat <<EOT >> src/components/Main.js
 import React from "react";
 import {connect} from 'react-redux';
 // end imports
@@ -172,7 +196,7 @@ module.exports=Main;
 EOT
 # ================ #
 
-cd projects/$1/src
+cd src
 $(zenity --info  --title="Reacter | Info" --text="$1 project has created successfully")
 fi
 }

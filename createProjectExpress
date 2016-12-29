@@ -12,6 +12,7 @@ createExpressServerCmd="express"
 eval $createExpressServerCmd
 mv public/javascripts/ public/js/
 mv public/stylesheets/ public/css/
+rm package.json
 clear
 mkdir src
 touch webpack.config.js
@@ -25,7 +26,6 @@ touch src/reducers/index.js
 touch src/store.js
 touch src/Main.js
 mkdir -p public/js
-touch public/index.html
 packageName=$1
 packageName=${packageName// /_}
 packageName=`echo "${packageName}" | tr '[A-Z]' '[a-z]'`
@@ -75,7 +75,6 @@ cat <<EOT >> bower.json
 {
   "name": "$packageName",
   "homepage": "",
-  "description": "Control Panel",
   "license": "MIT",
   "devDependencies": {
     "jquery": "^2.2.3",
@@ -85,7 +84,7 @@ cat <<EOT >> bower.json
 }
 EOT
 
-# add bower.json body#
+# add bowerrc body#
 cat <<EOT >> .bowerrc
 {
   "directory" : "public/vendors"
