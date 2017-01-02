@@ -14,6 +14,7 @@ eval $createExpressServerCmd
 mv public/javascripts/ public/js/
 mv public/stylesheets/ public/css/
 rm package.json
+rm views/index.jade
 clear
 mkdir src
 touch webpack.config.js
@@ -99,11 +100,11 @@ html
   head
     title= title     
     link(rel='stylesheet', href='/vendors/bootstrap/dist/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/vendors/fontawesome/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/vendors/font-awesome/css/font-awesome.min.css')
     link(rel='stylesheet', href='/css/style.css')
   body
     #app Reacter
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+    script(src='./vendors/jquery/dist/jquery.min.js')
     script(src='./js/app.js')
 EOT
 

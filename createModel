@@ -41,7 +41,7 @@ export function function${Model}() {
 EOT
 
 # add component body#
-cat <<EOT >> components/$model/${Model}.js
+cat <<EOT >> components/${model}/${Model}.js
 var React = require("react");
 var $model = React.createClass({
 	render:function() {
@@ -58,8 +58,8 @@ EOT
 
 #add reducer to index of reducers
 insertBefore reducers/index.js "\/\/ end imports" "import $model from './$model';" 
-insertBefore components/Main.js "\/\/ end imports" "import $model from '../components/$model/${Model}.js';" 
-insertBefore components/Main.js "\/\/ end imports" "import $model from '../actions/${Model}Action';" 
+insertBefore components/Main.js "\/\/ end imports" "import $Model from '../components/${model}/${Model}.js';" 
+insertBefore components/Main.js "\/\/ end imports" "import ${model}Action from '../actions/${Model}Action';" 
 insertBefore reducers/index.js "\/\/ end reducers object" "$model," 
 $(zenity --info  --title="Reacter | Info" --text="$Model model has created successfully")
 fi

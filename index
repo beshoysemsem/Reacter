@@ -57,7 +57,7 @@ do
     # Now we have project 
     while true #models menu loop
     do
-        choice=$(zenity --title "Reacter | Model" --text "Please Choose one from the below options" --list --radiolist --column "" --column "Options" False Install\ Project\ Packages False Create\ new\ model False List\ models True Change\ project)
+        choice=$(zenity --title "${projectName} | Reacter | Model" --text "Please Choose one from the below options" --list --radiolist --column "" --column "Options" False Install\ Project\ Packages False Create\ new\ model False List\ models True Change\ project)
         case $choice in
 		Install\ Project\ Packages)
 		eval "cd ../"
